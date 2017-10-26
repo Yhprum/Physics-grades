@@ -274,8 +274,8 @@
                 let possible = (hw*.05 + clickers*.04 + optional*.03 + wiki*.02 + lectures*.01 + reading*.01) / 16;
                 let extra = Math.max(0, Math.min(5, possible*16 - hw*.05) + hw*.05 - 10)*50
 
-                document.getElementById('examgrade').innerText = testgrade;
-                document.getElementById('labgrade').innerText = labgrade;
+                document.getElementById('examgrade').innerText = Math.round(testgrade * 100) / 100;
+                document.getElementById('labgrade').innerText = Math.round(labgrade * 100) / 100;
                 document.getElementById('bucketgrade').innerText = Math.round(bucketgrade * 100) / 100;
                 document.getElementById('ecgrade').innerText = Math.round(extra * 100) / 100;
 
