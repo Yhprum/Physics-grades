@@ -283,7 +283,7 @@
                 var fgrade = 0;
                 if(final) {
                     document.getElementById('finalgrade').innerText = final;
-                    fgrade = .25*final + .45*testgrade + .2*labgrade + .1*bucketgrade + .02*ecgrade;
+                    fgrade = .25*final + .45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra;
                 } else {
                     fgrade = (.45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra) * 100/75;
                     let needA = (90-.75*fgrade)/.25
