@@ -8,7 +8,6 @@
     <div class="container">
         <div class="text-center">
             <h1>Physics 2 Grade Calculator</h1>
-            <p class="lead">v1.0.1</p>
         </div>
         <div class="col-md-4">
             <h3>Exam Grades</h3>
@@ -66,6 +65,24 @@
                 <label for="assignment" class="col-sm-5 control-label">Lab Assignments</label>
                 <div class="col-sm-7">
                   <input type="number" class="form-control" id="assignment">
+                </div>
+              </div>
+            </form>
+            <h3>Extra Credit</h3>
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="pre" class="col-sm-5 control-label">Pre-Assessment</label>
+                <div class="col-sm-7">
+                  <select class="form-control" id="pre">
+                    <option>Not Completed</option>
+                    <option>Completed</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="post" class="col-sm-5 control-label">Post-Assessment</label>
+                <div class="col-sm-7">
+                  <input type="number" class="form-control" id="post" placeholder="Estimate grade">
                 </div>
               </div>
             </form>
@@ -143,9 +160,14 @@
                         <td id="bucketgrade">N/A</td>
                     </tr>
                     <tr>
-                        <td>Extra Credit</td>
+                        <td>Extra Bucket</td>
                         <td>2%</td>
                         <td id="ecgrade">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>E&M Assessment</td>
+                        <td>1%</td>
+                        <td id="assessment">N/A</td>
                     </tr>
                 </tbody>
             </table>
@@ -274,18 +296,27 @@
                 let possible = (hw*.05 + clickers*.04 + optional*.03 + wiki*.02 + lectures*.01 + reading*.01) / 16;
                 let extra = Math.max(0, Math.min(5, possible*16 - hw*.05) + hw*.05 - 10)*50
 
+                let assessment = 0
+                if ($("#pre").val() == "Completed") {
+                    assessment += 25
+                }
+                if ($("#post").val() != "") {
+                    assessment += 25 + $("#post").val() *  .5
+                }
+
                 document.getElementById('examgrade').innerText = Math.round(testgrade * 100) / 100;
                 document.getElementById('labgrade').innerText = Math.round(labgrade * 100) / 100;
                 document.getElementById('bucketgrade').innerText = Math.round(bucketgrade * 100) / 100;
                 document.getElementById('ecgrade').innerText = Math.round(extra * 100) / 100;
+                document.getElementById('assessment').innerText = Math.round(assessment * 100) / 100;
 
                 let final = document.getElementById('final').value;
                 var fgrade = 0;
                 if(final) {
                     document.getElementById('finalgrade').innerText = final;
-                    fgrade = .25*final + .45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra;
+                    fgrade = .25*final + .45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra + .01 * assessment;
                 } else {
-                    fgrade = (.45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra) * 100/75;
+                    fgrade = (.45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra) * 100/75  + .01 * assessment;
                     let needA = (90-.75*fgrade)/.25
                     needA = Math.round(needA * 100) / 100;
                     let needB = (80-.75*fgrade)/.25
