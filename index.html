@@ -228,6 +228,7 @@
                 let reading = general.match(/Reading.*\n*(.*)/) || 0;
                 let lectures = general.match(/Public Lectures.*\n*(.*)/) || 0;
                 let wiki = general.match(/Wiki.*\n*(.*)/) || 0;
+                let final = general.match(/Exam.*\n*(.*)/) || 0;
 
                 let test1 = tests.match(/Test 1\t1.00\t([0-9\.]*)/) || 0;
                 let test2 = tests.match(/Test 2\t1.00\t([0-9\.]*)/) || 0;
@@ -238,6 +239,7 @@
                 document.getElementById('test2').value = test2[1] || 'a';
                 document.getElementById('test3').value = test3[1] || 'a';
                 document.getElementById('test4').value = test4[1] || 'a';
+                document.getElementById('final').value = final[1] || 'a';
 
                 document.getElementById('quiz').value = quiz[1] || 0;
                 document.getElementById('checkpoint').value = checkpoints[1] || 0;
