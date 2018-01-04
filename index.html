@@ -219,38 +219,41 @@
                 let general = document.getElementById('general').value;
                 let tests = document.getElementById('tests').value;
 
-                let hw = general.match(/Homework.*\n*(.*)/) || 0;
-                let quiz = general.match(/Quiz.*\n*(.*)/) || 0;
-                let lab = general.match(/Lab.*\n*(.*)/) || 0;
-                let checkpoints = general.match(/Lab Checkpoints.*\n*(.*)/) || 0;
-                let clickers = general.match(/In Class.*\n*(.*)/) || 0;
-                let optional = general.match(/Optional.*\n*(.*)/) || 0;
-                let reading = general.match(/Reading.*\n*(.*)/) || 0;
-                let lectures = general.match(/Public Lectures.*\n*(.*)/) || 0;
-                let wiki = general.match(/Wiki.*\n*(.*)/) || 0;
-                let final = general.match(/Exam.*\n*(.*)/) || 0;
+                if (general) {
+                    let hw = general.match(/Homework.*\n*(.*)/) || 0;
+                    let quiz = general.match(/Quiz.*\n*(.*)/) || 0;
+                    let lab = general.match(/Lab.*\n*(.*)/) || 0;
+                    let checkpoints = general.match(/Lab Checkpoints.*\n*(.*)/) || 0;
+                    let clickers = general.match(/In Class.*\n*(.*)/) || 0;
+                    let optional = general.match(/Optional.*\n*(.*)/) || 0;
+                    let reading = general.match(/Reading.*\n*(.*)/) || 0;
+                    let lectures = general.match(/Public Lectures.*\n*(.*)/) || 0;
+                    let wiki = general.match(/Wiki.*\n*(.*)/) || 0;
+                    let final = general.match(/Exam.*\n*(.*)/) || 0;
 
-                let test1 = tests.match(/Test 1\t1.00\t([0-9\.]*)/) || 0;
-                let test2 = tests.match(/Test 2\t1.00\t([0-9\.]*)/) || 0;
-                let test3 = tests.match(/Test 3\t1.00\t([0-9\.]*)/) || 0;
-                let test4 = tests.match(/Test 4\t1.00\t([0-9\.]*)/) || 0;
+                    document.getElementById('quiz').value = quiz[1] || 0;
+                    document.getElementById('checkpoint').value = checkpoints[1] || 0;
+                    document.getElementById('assignment').value = lab[1] || 0;
 
-                document.getElementById('test1').value = test1[1] || 'a';
-                document.getElementById('test2').value = test2[1] || 'a';
-                document.getElementById('test3').value = test3[1] || 'a';
-                document.getElementById('test4').value = test4[1] || 'a';
-                document.getElementById('final').value = final[1] || 'a';
+                    document.getElementById('homework').value = hw[1] || 0;
+                    document.getElementById('clicker').value = clickers[1] || 0;
+                    document.getElementById('optional').value = optional[1] || 0;
+                    document.getElementById('wiki').value = wiki[1] || 0;
+                    document.getElementById('lecture').value = lectures[1] || 0;
+                    document.getElementById('reading').value = reading[1] || 0;
+                }
+                if (tests) {
+                    let test1 = tests.match(/Test 1\t1.00\t([0-9\.]*)/) || 0;
+                    let test2 = tests.match(/Test 2\t1.00\t([0-9\.]*)/) || 0;
+                    let test3 = tests.match(/Test 3\t1.00\t([0-9\.]*)/) || 0;
+                    let test4 = tests.match(/Test 4\t1.00\t([0-9\.]*)/) || 0;
 
-                document.getElementById('quiz').value = quiz[1] || 0;
-                document.getElementById('checkpoint').value = checkpoints[1] || 0;
-                document.getElementById('assignment').value = lab[1] || 0;
-
-                document.getElementById('homework').value = hw[1] || 0;
-                document.getElementById('clicker').value = clickers[1] || 0;
-                document.getElementById('optional').value = optional[1] || 0;
-                document.getElementById('wiki').value = wiki[1] || 0;
-                document.getElementById('lecture').value = lectures[1] || 0;
-                document.getElementById('reading').value = reading[1] || 0;
+                    document.getElementById('test1').value = test1[1] || document.getElementById('test1').value;
+                    document.getElementById('test2').value = test2[1] || document.getElementById('test1').value;
+                    document.getElementById('test3').value = test3[1] || document.getElementById('test1').value;
+                    document.getElementById('test4').value = test4[1] || document.getElementById('test1').value;
+                    document.getElementById('final').value = final[1] || document.getElementById('final').value;
+                }
                 
                 
                 $("#importmodal").modal('hide');
@@ -318,6 +321,8 @@
                 if(final) {
                     document.getElementById('finalgrade').innerText = final;
                     fgrade = .25*final + .45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra + .01 * assessment;
+                    let t = "Congration. You done it";
+                    document.getElementById('need').innerText = t;
                 } else {
                     fgrade = (.45*testgrade + .2*labgrade + .1*bucketgrade + .02*extra) * 100/75  + .01 * assessment;
                     let needA = (90-.75*fgrade)/.25
