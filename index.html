@@ -229,6 +229,7 @@
                     let reading = general.match(/Reading.*\n*(.*)/) || 0;
                     let lectures = general.match(/Public Lectures.*\n*(.*)/) || 0;
                     let wiki = general.match(/Wiki.*\n*(.*)/) || 0;
+                    let final = general.match(/Exam.*\n*(.*)/) || 0;
 
                     document.getElementById('quiz').value = quiz[1] || 0;
                     document.getElementById('checkpoint').value = checkpoints[1] || 0;
@@ -251,6 +252,7 @@
                     document.getElementById('test2').value = test2[1] || document.getElementById('test1').value;
                     document.getElementById('test3').value = test3[1] || document.getElementById('test1').value;
                     document.getElementById('test4').value = test4[1] || document.getElementById('test1').value;
+                    document.getElementById('final').value = final[1] || document.getElementById('final').value;
                 }
                 
                 
