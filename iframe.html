@@ -1,0 +1,7 @@
+window.onmessage = function(e) {
+  if (e.origin !== "http://example.com") {
+    return;
+  }
+  var payload = JSON.parse(e.data);
+  localStorage.setItem(payload.key, JSON.stringify(payload.data));
+};
